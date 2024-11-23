@@ -31,7 +31,7 @@ pipeline {
                     withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) { 
                         sh '''
                         aws sts get-caller-identity --region ${AWS_REGION}  # Confirm AWS credentials
-                        aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_URI}
+                        aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 676206908022.dkr.ecr.eu-north-1.amazonaws.com
                         '''
                     }
                 }
