@@ -19,13 +19,7 @@ pipeline {
         stage('Login to ECR') {
             steps {
                 script {
-                    // Fetch AWS Account ID dynamically
-                    AWS_ACCOUNT_ID = sh(script: 'aws sts get-caller-identity --query "Account" --output text', returnStdout: true).trim()
-
-                    // Construct the ECR URI
-                    ECR_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}"
-                    
-                    echo "ECR URI: ${ECR_URI}"  // For debugging purposes
+            
 
                     // Log in to Amazon ECR using the AWS CLI
                     withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) { 
