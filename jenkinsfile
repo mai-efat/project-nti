@@ -13,6 +13,9 @@ pipeline {
             steps {
                 // Checkout your source code (from GitHub, Bitbucket, etc.)
                 git branch: 'backend', url: 'https://github.com/mai-efat/project-nti.git'
+
+
+
             }
         }
         
@@ -20,7 +23,7 @@ pipeline {
             steps {
                 script {
             
-
+                       
                     // Log in to Amazon ECR using the AWS CLI
                     withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) { 
                         sh '''
@@ -57,10 +60,10 @@ pipeline {
     
     post {
         success {
-            echo "Docker image pushed successfully to ECR!"
+            cleanWs() 
         }
         failure {
-            echo "Build or Push to ECR failed."
+            cleanWs() 
         }
     }
 }
