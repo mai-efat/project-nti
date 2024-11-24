@@ -40,9 +40,9 @@ pipeline {
                 script {
                     // Build the Docker image
                     sh '''
-                    #!/bin/bash
+                
 
-                docker build -t ${ECR_URI}:${env.BUILD_ID} -f ${DOCKERFILE_DIR}/Dockerfile .
+                docker build -t ${ECR_URI}:${env.BUILD_ID}  .
 
                     '''
                 }
