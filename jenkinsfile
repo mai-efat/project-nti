@@ -44,7 +44,7 @@ pipeline {
                 script {
                     // Build the Docker image
                     sh '''
-                    docker build -t ${ECR_URI}:${IMAGE_TAG} .
+                    docker build -t my-ecr-repository .
                     '''
                 }
             }
@@ -55,6 +55,7 @@ pipeline {
                 script {
                     // Push the Docker image to the ECR repository
                     sh '''
+                    docker tag my-ecr-repository:latest 676206908022.dkr.ecr.eu-north-1.amazonaws.com/my-ecr-repository:latest
                     docker push ${ECR_URI}:${IMAGE_TAG}
                     '''
                 }
