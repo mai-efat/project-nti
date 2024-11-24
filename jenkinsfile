@@ -15,7 +15,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout your source code (from GitHub, Bitbucket, etc.)
-                git branch: 'backend', url: 'https://github.com/mai-efat/project-nti.git'
+                git branch: 'frontend_branch', url: 'https://github.com/mai-efat/project-nti.git'
             }
         }
         
