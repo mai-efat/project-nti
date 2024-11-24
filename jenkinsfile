@@ -42,7 +42,7 @@ pipeline {
                     sh '''
                 
 
-            docker build -t   backend:${env.BUILD_ID}  backend
+            docker build -t   backend:${env.BUILD_ID}  .
 
                     '''
                 }
