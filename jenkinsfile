@@ -55,8 +55,9 @@ pipeline {
                     // Push the Docker image to the ECR repository
                     sh '''
                 
-
-                    docker push ${ECR_URI}:${env.BUILD_ID}           
+                     docker tag my-ecr-repository:latest 676206908022.dkr.ecr.eu-north-1.amazonaws.com/my-ecr-repository:latest
+                    docker push 676206908022.dkr.ecr.eu-north-1.amazonaws.com/my-ecr-repository:latest
+                               
 
                     '''
                 }
