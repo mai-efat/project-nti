@@ -42,7 +42,8 @@ pipeline {
                     sh '''
                 
 
-                docker build -t my-ecr-repository .
+            docker build -t ${ECR_URI}:${env.BUILD_ID} -f frontend/Dockerfile frontend
+
 
                     '''
                 }
