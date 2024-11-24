@@ -39,7 +39,7 @@ pipeline {
                     // Build the Docker image from the Dockerfile in the 'docker' folder
                     sh '''
                     docker ps
-                    docker build -t  frontend:${env.BUILD_ID}  frontend
+                    docker build -t ${ECR_URI}:${env.BUILD_ID} -f frontend/Dockerfile frontend
 
                     '''
                 }
