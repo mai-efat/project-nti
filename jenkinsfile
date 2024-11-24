@@ -80,7 +80,9 @@ withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws
             steps {
                 script {
                     // Apply Kubernetes deployment configuration
-                
+                withCredentials([string(credentialsId: 'k8s', variable: 'k8s')]) {
+    
+
                       sh '''
                        kubectl get nodes
                         
@@ -89,8 +91,9 @@ withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws
                         kubectl apply -f service.yml 
 
                         '''
-                    
+                    }
                 }
+
             }
         }
     }
