@@ -40,6 +40,7 @@ pipeline {
                 script {
                     // Build the Docker image
                     sh '''
+
                 
 
                     docker build -t my-ecr-repository .
@@ -68,7 +69,7 @@ pipeline {
                 script {
                     // Apply Kubernetes deployment configuration
                    withCredentials([file(credentialsId: 'k8s', variable: 'k8s')]) {
-                   export KUBECONFIG=$KUBECONFIG
+                   kubectl get nodes
 
                     
                       sh '''
