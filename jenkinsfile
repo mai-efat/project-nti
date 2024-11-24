@@ -68,7 +68,8 @@ pipeline {
             steps {
                 script {
                     // Apply Kubernetes deployment configuration
-                   withCredentials([file(credentialsId: 'k8s', variable: 'KUBECONFIG')]) {                    
+                       withCredentials([file(credentialsId: 'k8s', variable: 'KUBECONFIG')]) {
+
                       sh '''
                         export KUBECONFIG=$KUBECONFIG
                         kubectl apply -f deployment.yml --validate=false
