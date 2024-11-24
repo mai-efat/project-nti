@@ -75,6 +75,7 @@ withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws
                 }
             }
         }
+}
   stage('Deploy to Kubernetes') {
             steps {
                 script {
