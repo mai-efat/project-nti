@@ -42,7 +42,7 @@ pipeline {
                     sh '''
                 
 
-            docker build -t   backend:${env.BUILD_ID}  .
+                    docker build -t my-ecr-repository .
 
                     '''
                 }
@@ -54,7 +54,7 @@ pipeline {
                 script {
                     // Push the Docker image to the ECR repository
                     sh '''
-                    #!/bin/bash
+                
 
                     docker push ${ECR_URI}:${env.BUILD_ID}           
 
