@@ -38,6 +38,7 @@ pipeline {
                 script {
                     // Build the Docker image from the Dockerfile in the 'docker' folder
                     sh '''
+                    docker ps
                     docker build -t ${ECR_URI}:${IMAGE_TAG} -f ${DOCKERFILE_DIR}/Dockerfile .
                     '''
                 }
