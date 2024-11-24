@@ -40,7 +40,8 @@ pipeline {
                 script {
                     // Build the Docker image
                     sh '''
-                    docker build -t ${ECR_URI}:${IMAGE_TAG} .
+                docker build -t ${ECR_URI}:${env.BUILD_ID} -f ${DOCKERFILE_DIR}/Dockerfile .
+
                     '''
                 }
             }
@@ -51,7 +52,8 @@ pipeline {
                 script {
                     // Push the Docker image to the ECR repository
                     sh '''
-                    docker push ${ECR_URI}:${IMAGE_TAG}
+                    docker push ${ECR_URI}:${env.BUILD_ID}           
+
                     '''
                 }
             }
