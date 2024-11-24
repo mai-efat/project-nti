@@ -64,6 +64,17 @@ pipeline {
                 }
             }
         }
+ stage('Set up EKS kubeconfig') {
+            steps {
+                script {
+withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+
+                    sh '''
+                        aws eks --region eu-north-1 update-kubeconfig --name demo
+                    '''
+                }
+            }
+        }
   stage('Deploy to Kubernetes') {
             steps {
                 script {
@@ -71,9 +82,8 @@ pipeline {
                     withCredentials([file(credentialsId: 'k8s', variable: 'KUBECONFIG')]) {
                       sh '''
                        
-
-                        export KUBECONFIG=$KUBECONFIG
-                  cat $KUBECONFIG
+                         export KUBECONFIG=$KUBECONFIG
+                          cat $KUBECONFIG
 
                         kubectl apply -f deployment.yml 
                         kubectl apply -f service.yml 
