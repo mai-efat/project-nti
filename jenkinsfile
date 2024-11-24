@@ -68,14 +68,12 @@ pipeline {
                 script {
                     // Apply Kubernetes deployment configuration
                    withCredentials([file(credentialsId: 'k8s', variable: 'k8s')]) {
-                    export KUBECONFIG=$K8s
+                   export KUBECONFIG=$KUBECONFIG
+
                     
-
-
                       sh '''
                         kubectl apply -f deployment.yml 
                         kubectl apply -f service.yml 
-
 
                         '''
                     }
