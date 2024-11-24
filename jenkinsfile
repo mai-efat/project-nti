@@ -69,8 +69,8 @@ pipeline {
                     // Apply Kubernetes deployment configuration
                    withCredentials([file(credentialsId: 'k8s', variable: 'kubeconfig')]) {
                       sh '''
-                        kubectl apply -f deployment.yml --validate=false
-                        kubectl apply -f service.yml --validate=false
+                        kubectl apply -f deployment.yml 
+                        kubectl apply -f service.yml 
 
 
                         '''
