@@ -80,13 +80,10 @@ withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws
             steps {
                 script {
                     // Apply Kubernetes deployment configuration
-                withCredentials([string(credentialsId: 'k8s', variable: 'k8s')]) {
-    
-
+                withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'demo', contextName: '', credentialsId: 'k8s', namespace: 'default', serverUrl: 'https://F4C66CFAF3E8BBCB09B0EA4B890D4C7E.yl4.eu-north-1.eks.amazonaws.com']]) 
+{
                       sh '''
                        kubectl get nodes
-                        
-
                         kubectl apply -f deployment.yml 
                         kubectl apply -f service.yml 
 
