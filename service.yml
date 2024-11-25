@@ -8,6 +8,6 @@ spec:
   ports:
     - protocol: TCP
       port: 80              # Port for internal access in the cluster
-      targetPort: 3001      # Port on the backend container
+      targetPort: 80      # Port on the backend container
       nodePort: 30080       # Port exposed externally
   type: NodePort           # Exposes the service outside the cluster
