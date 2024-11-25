@@ -11,9 +11,8 @@ metadata:
     alb.ingress.kubernetes.io/subnets: subnet-0d125927979948aa8,subnet-09f8cacf68731e45f  # Replace with your public subnet IDs
 spec:
   ingressClassName: alb
-  rules:
-    - host:  
-      http:
+  rules: 
+     - http:
         paths:
           - path: /
             pathType: Prefix
@@ -21,4 +20,4 @@ spec:
               service:
                 name: backend-service  # Replace with your service name
                 port:
-                  number: 80           # Port exposed by your service
+                  number: 80        # Port exposed by your service
