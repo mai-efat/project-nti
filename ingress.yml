@@ -6,7 +6,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "alb"  # Specifies that this ingress uses the AWS Load Balancer Controller
     alb.ingress.kubernetes.io/scheme: internet-facing  # Sets the ALB to be internet-facing
-    alb.ingress.kubernetes.io/target-type: ip  # Specifies IP as the target type (use 'instance' for EC2 instances)
+    alb.ingress.kubernetes.io/target-type: instance  # Specifies IP as the target type (use 'instance' for EC2 instances)
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'  # Exposes HTTP on port 80
     alb.ingress.kubernetes.io/subnets: subnet-0d125927979948aa8,subnet-09f8cacf68731e45f  # Replace with your public subnet IDs
 spec:
