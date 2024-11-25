@@ -84,8 +84,8 @@ withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws
 {
                       sh '''
                        kubectl get pods -n default
-                        kubectl apply -f deployment.yml 
-                        kubectl apply -f service.yml 
+                        kubectl apply -f deployment.yml -n default
+                        kubectl apply -f service.yml -n default
 
                         '''
                     }
