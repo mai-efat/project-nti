@@ -1,13 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend-service
+  name: backend-service  # Replace with your service name
 spec:
+  type: ClusterIP  # Default service type
   selector:
-    app: backend  # Matches the labels in the deployment.yaml
+    app: backend  # Replace with your pod selector
   ports:
-    - protocol: TCP
-      port: 80              # Port for internal access in the cluster
-      targetPort: 3001     # Port on the backend container
-      nodePort: 30080       # Port exposed externally
-  type: NodePort           # Exposes the service outside the cluster
+    - port: 80          # Port exposed by the service
+      targetPort: 3001  # Port on the pods
+
