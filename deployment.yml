@@ -16,4 +16,4 @@ spec:
       - name: backendcontainer
         image: nginx  # ECR image
         ports:
-        - containerPort: 80
+        - containerPort: 3001
