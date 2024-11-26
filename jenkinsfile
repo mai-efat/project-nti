@@ -80,7 +80,7 @@ withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws
             steps {
                 script {
                     // Apply Kubernetes deployment configuration
-                withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'demo', contextName: '', credentialsId: 'k8s', namespace: 'default', serverUrl: 'https://F4C66CFAF3E8BBCB09B0EA4B890D4C7E.yl4.eu-north-1.eks.amazonaws.com']]) 
+                withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'demo', contextName: '', credentialsId: 'k8s', namespace: 'default', serverUrl: 'https://358CE0D82B9D3732D9E6D3D9904D033F.gr7.eu-north-1.eks.amazonaws.com']]) 
 {
                       sh '''
                        kubectl get pods -n default
