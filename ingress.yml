@@ -4,15 +4,12 @@ metadata:
   name: ingress
   namespace: default
   annotations:
-  
-    alb.ingress.kubernetes.io/scheme: internet-facing  # Sets the ALB to be internet-facing
-    alb.ingress.kubernetes.io/target-type: instance  # Specifies IP as the target type (use 'instance' for EC2 instances)
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'  # Exposes HTTP on port 80
-    alb.ingress.kubernetes.io/subnets: subnet-0d125927979948aa8,subnet-09f8cacf68731e45f  # Replace with your public subnet IDs
+   nginx.ingress.kubernetes.io/rewrite-target: / 
 spec:
-  ingressClassName: alb
+  ingressClassName: nginx
   rules: 
-     - http:
+     - host:
+       http:
         paths:
           - path: /
             pathType: Prefix
