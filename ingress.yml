@@ -15,6 +15,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: backend-service  # Replace with your service name
+                name: frontend-service  # Replace with your service name
                 port:
                   number: 80        # Port exposed by your service
