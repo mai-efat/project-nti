@@ -16,4 +16,4 @@ spec:
       - name: backendcontainer
         image: 676206908022.dkr.ecr.eu-north-1.amazonaws.com/my-ecr-repository:${IMAGE_TAG}  # ECR image
         ports:
-        - containerPort: 80
+        - containerPort: 3001
