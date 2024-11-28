@@ -6,102 +6,90 @@ pipeline {
         AWS_REGION = 'eu-north-1'  // Change to your AWS region
         ECR_REPOSITORY = 'my-ecr-repository'  // Replace with your ECR repository name
         IMAGE_TAG = "latest"    
-    
+    }
+
     stages {
         stage('Checkout') {
             steps {
                 // Checkout your source code (from GitHub, Bitbucket, etc.)
                 git branch: 'backend', url: 'https://github.com/mai-efat/project-nti.git'
-
-
-
             }
         }
-        
+
         stage('Login to ECR') {
             steps {
                 script {
-            
-                       
                     // Log in to Amazon ECR using the AWS CLI
-                    withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) { 
+                    withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                         sh '''
                         aws sts get-caller-identity --region ${AWS_REGION}  # Confirm AWS credentials
-                        aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 676206908022.dkr.ecr.eu-north-1.amazonaws.com
+                        aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin 676206908022.dkr.ecr.${AWS_REGION}.amazonaws.com
                         '''
                     }
                 }
             }
         }
-        
+
         stage('Build Docker Image') {
             steps {
                 script {
                     // Build the Docker image
                     sh '''
-
-                
-
-                    docker build -t my-ecr-repository .
-
+                    docker build -t ${ECR_REPOSITORY}:${IMAGE_TAG} .
                     '''
                 }
             }
         }
-        
+
         stage('Push to ECR') {
             steps {
                 script {
                     // Push the Docker image to the ECR repository
                     sh '''
-                
-                     docker tag my-ecr-repository:${IMAGE_TAG} 676206908022.dkr.ecr.eu-north-1.amazonaws.com/my-ecr-repository:${IMAGE_TAG}
-                    docker push 676206908022.dkr.ecr.eu-north-1.amazonaws.com/my-ecr-repository:${IMAGE_TAG}
-                               
-
+                    docker tag ${ECR_REPOSITORY}:${IMAGE_TAG} 676206908022.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:${IMAGE_TAG}
+                    docker push 676206908022.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:${IMAGE_TAG}
                     '''
                 }
             }
         }
- stage('Set up EKS kubeconfig') {
+
+        stage('Set up EKS kubeconfig') {
             steps {
                 script {
-withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-
-                    sh '''
-                        aws eks --region eu-north-1 update-kubeconfig --name demo
-                    '''
+                    withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                        sh '''
+                        aws eks --region ${AWS_REGION} update-kubeconfig --name demo
+                        '''
+                    }
                 }
             }
         }
-}
-  stage('Deploy to Kubernetes') {
+
+        stage('Deploy to Kubernetes') {
             steps {
                 script {
                     // Apply Kubernetes deployment configuration
- withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'demo', contextName: '', credentialsId: 'k8s', namespace: 'default', serverUrl: 'https://EB60D98B5BDC8C67E05A75848701B716.yl4.eu-north-1.eks.amazonaws.com']]) {
-                      sh '''
+                    withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'demo', contextName: '', credentialsId: 'k8s', namespace: 'default', serverUrl: 'https://EB60D98B5BDC8C67E05A75848701B716.yl4.${AWS_REGION}.amazonaws.com']]) {
+                        sh '''
                         kubectl get pods -n default
                         kubectl apply -f deployment.yml -n default
                         kubectl apply -f service.yml -n default
                         kubectl apply -f pv.yml
                         kubectl apply -f headless.yml
                         kubectl apply -f statfulset.yml
-
                         '''
                     }
                 }
-
             }
         }
     }
-    
+
     post {
         success {
-            cleanWs() 
+            cleanWs()  // Clean workspace after successful build
         }
         failure {
-            cleanWs() 
+            cleanWs()  // Clean workspace after failed build
         }
     }
 }
