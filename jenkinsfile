@@ -5,7 +5,7 @@ pipeline {
         // AWS region and ECR repository details
         AWS_REGION = 'eu-north-1'  // Change to your AWS region
         ECR_REPOSITORY = 'my-ecr-repository'  // Replace with your ECR repository name
-        IMAGE_TAG = "${BUILD_NUMBER}"    
+        IMAGE_TAG = "latest"    
     
     stages {
         stage('Checkout') {
