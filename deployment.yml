@@ -14,10 +14,9 @@ spec:
     spec:
       containers:
       - name: frontend-container
-        image: 676206908022.dkr.ecr.eu-north-1.amazonaws.com/my-ecr-repository:latest  # ECR image
+        image: 676206908022.dkr.ecr.eu-north-1.amazonaws.com/my-ecr-repository:${IMAGE_TAG}   # ECR image
         ports:
         - containerPort: 3000
-
-        env:
-         - name: BACKEND_URL
-           value: "http://backend-service:90"  
+        env:  # Correctly aligned
+        - name: BACKEND_URL
+          value: "http://backend-service:90"
