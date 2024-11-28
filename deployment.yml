@@ -16,4 +16,4 @@ spec:
       - name: frontend-container
         image: 676206908022.dkr.ecr.eu-north-1.amazonaws.com/my-ecr-repository:latest  # ECR image
         ports:
-        - containerPort: 3001
+        - containerPort: 3000
