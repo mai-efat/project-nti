@@ -3,7 +3,7 @@ const cors = require('cors');
 const mongoose = require("mongoose");
 const port = 3001;
 const routes = require("./routes");
-const mongoUri = "mongodb://root:Password@mongo:27017/todos?authSource=admin";
+const mongoUri = "mongodb://mongodb-service-0.mongodb-service.default.svc.cluster.local:27017;
 
 main().catch((err) => console.log(err));
 
