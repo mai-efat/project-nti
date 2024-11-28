@@ -17,3 +17,7 @@ spec:
         image: 676206908022.dkr.ecr.eu-north-1.amazonaws.com/my-ecr-repository:latest  # ECR image
         ports:
         - containerPort: 3000
+
+        env:
+         - name: BACKEND_URL
+           value: "http://backend-service:90"  
