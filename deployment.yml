@@ -19,4 +19,4 @@ spec:
         - containerPort: 3000
         env:  # Correctly aligned
         - name: REACT_APP_API_URL
-          value: "http://backend-service:90"
+          value: "http://backend-service:90/api"
