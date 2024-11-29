@@ -1,21 +1,7 @@
 # EKS Deployment Pipeline
 
 This project automates the process of building Docker images for a backend and frontend application, pushing them to Amazon Elastic Container Registry (ECR), and deploying them to Amazon Elastic Kubernetes Service (EKS) using a CI/CD pipeline.
-
 ---
-
-## Table of Contents
-- [Project Overview](#project-overview)
-- [Branch Structure](#branch-structure)
-- [Prerequisites](#prerequisites)
-- [Pipeline Workflow](#pipeline-workflow)
-- [Technologies Used](#technologies-used)
-- [Setup and Deployment](#setup-and-deployment)
-- [Contributing](#contributing)
-- [License](#license)
-
----
-
 ## Project Overview
 This repository contains:
 - A **backend** service for handling API requests.
@@ -58,15 +44,13 @@ Before using this repository, ensure you have the following:
 
 ### 3. Deployment
 Both backend and frontend services are deployed as separate workloads in the EKS cluster using Kubernetes Deployment manifests.
-
 ---
-
 ## Technologies Used
 - **AWS ECR**: For storing Docker images.
 - **AWS EKS**: For running the containerized applications.
 - **Docker**: For containerizing the applications.
 - **Kubernetes**: For orchestration.
 - **CI/CD Tool**: For automating the pipeline .
-
+- **Ingress NGINX Controller**: For managing external access to the services running in the EKS cluster.
 ---
 
