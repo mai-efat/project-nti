@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backendcontainer
+        image: 676206908022.dkr.ecr.eu-north-1.amazonaws.com/my-ecr-repository:latest  # ECR image
+        ports:
+        - containerPort: 3001
