@@ -19,4 +19,4 @@ EXPOSE 3001
 
 
 # Start the application 
-CMD ["node", "routes/todo.js"]
+CMD ["node", "server.js"]
