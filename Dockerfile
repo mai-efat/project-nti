@@ -10,7 +10,7 @@ COPY package*.json ./
 # get dependencies with npm install 
 RUN npm install
 
-COPY . .
+COPY . /app
 
 
 EXPOSE 3001
@@ -19,4 +19,4 @@ EXPOSE 3001
 
 
 # Start the application 
-CMD ["node", "routes/todo.js"]
+CMD ["node", "todo.js"]
