@@ -2,32 +2,23 @@
 
 This project automates the process of building Docker images for a backend and frontend application, pushing them to Amazon Elastic Container Registry (ECR), and deploying them to Amazon Elastic Kubernetes Service (EKS) using a CI/CD pipeline.
 ---
-## Project Overview
-This repository contains:
-- A **backend** service for handling API requests.
-- A **frontend** service for the user interface.
-
+## Branch Structure
+The repository contains two main branches:
+- **`backend`**: Contains the backend application code and Docker configuration.
+- **`frontend`**: Contains the frontend application code, Docker configuration, and Kubernetes manifests (`deployment.yml`, `service.yml`, `ingress.yml`) specific to the frontend service.
+---
 The pipeline:
 1. Builds Docker images for both services.
 2. Pushes images to ECR.
 3. Deploys the services to EKS clusters.
-
 ---
-
-## Branch Structure
-The repository contains two main branches:
-- **`backend`**: Contains the backend application code and Docker configuration.
-- **`frontend`**: Contains the frontend application code and Docker configuration.
-
----
-
 ## Prerequisites
 Before using this repository, ensure you have the following:
 1. An AWS account .
 2. AWS CLI installed and configured.
 3. Kubectl installed and configured for your EKS cluster.
 4. Docker installed on your machine.
-5. CI/CD platform account (e.g., GitHub Actions, Jenkins).
+5. CI/CD platform account ( Jenkins).
 
 ---
 
